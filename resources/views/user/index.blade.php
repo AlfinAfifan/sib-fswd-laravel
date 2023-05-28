@@ -8,7 +8,8 @@
       <!-- Begin Page Content -->
       <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+        <a href="{{ route('user.create') }}" class="btn btn-primary my-3">Create New</a>
+
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -30,20 +31,27 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>
-                        <img src="https://placehold.co/50x50" alt="">
-                    </td>
-                    <td>Edinburgh</td>
-                    <td>Edinburgh</td>
-                    <td>Edinburgh</td>
-                    <td>Edinburgh</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
-                        <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
-                    </td>
-                  </tr>
+                    @foreach ($users as $user)
+                    <tr>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>
+                          <img src="https://placehold.co/50x50" alt="">
+                      </td>
+                      <td>{{ $user->name }}</td>
+                      <td>{{ $user->email }}</td>
+                      <td>{{ $user->phone }}</td>
+                      <td>{{ $user->role_id }}</td>
+                      <td>
+                        <form onsubmit="return confirm('Are you sure delete data number {{ $loop->iteration }}?');" action="{{ route('user.destroy', $user->id) }}" method="POST">
+                            <a href="{{ route('user.edit', $user->id) }}" type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
+                        </form>
+                      </td>
+                    </tr>
+                    @endforeach
 
                 </tbody>
               </table>

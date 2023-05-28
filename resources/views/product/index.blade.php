@@ -8,7 +8,7 @@
       <!-- Begin Page Content -->
       <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+        <a href="{{ route('product.create') }}" class="btn btn-primary my-3">Create New</a>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -33,14 +33,19 @@
                     @foreach ($products as $product)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $product['category'] }}</td>
-                      <td>{{ $product['name'] }}</td>
-                      <td>{{ $product['price'] }}</td>
-                      <td>{{ $product['sale_price'] }}</td>
-                      <td>{{ $product['brands'] }}</td>
+                      <td>{{ $product->category->name }}</td>
+                      <td>{{ $product->name }}</td>
+                      <td>Rp. {{ number_format($product->price, 0, 2) }}</td>
+                      <td>Rp. {{ number_format($product->sale_price, 0, 2) }}</td>
+                      <td>{{ $product->brands }}</td>
                       <td>
-                          <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
-                          <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
+                        <form onsubmit="return confirm('Are you sure delete data number {{ $loop->iteration }}?');" action="{{ route('product.destroy', $product->id) }}" method="POST">
+                            <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
+                        </form>
                       </td>
                     </tr>
                     @endforeach

@@ -8,7 +8,7 @@
       <!-- Begin Page Content -->
       <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+        <a href="{{ route('role.create') }}" class="btn btn-primary my-3">Create New</a>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -26,11 +26,22 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                  </tr>
+
+                    @foreach ($roles as $role)
+                    <tr>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>{{ $role->name }}</td>
+                      <td>
+                        <form onsubmit="return confirm('Are you sure delete data number {{ $loop->iteration }}?');" action="{{ route('role.destroy', $role->id) }}" method="POST">
+                            <a href="{{ route('role.edit', $role->id) }}" type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
+                        </form>
+                      </td>
+                    </tr>
+                    @endforeach
 
                 </tbody>
               </table>
