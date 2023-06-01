@@ -8,7 +8,9 @@
       <!-- Begin Page Content -->
       <div class="container-fluid">
         <!-- Page Heading -->
+        @if (Auth::user()->role->name == 'admin')
         <a href="{{ route('category.create') }}" class="btn btn-primary my-3">Create New</a>
+        @endif
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -31,13 +33,16 @@
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $category['name'] }}</td>
                       <td>
-                        <form onsubmit="return confirm('Are you sure delete data number {{ $loop->iteration }}?');" action="{{ route('category.destroy', $category->id) }}" method="POST">
-                            <a href="{{ route('category.edit', $category->id) }}" type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                        @if (Auth::user()->role->name == 'admin')
+                            <form onsubmit="return confirm('Are you sure delete data number {{ $loop->iteration }}?');" action="{{ route('category.destroy', $category->id) }}" method="POST">
+                                <a href="{{ route('category.edit', $category->id) }}" type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
 
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
-                        </form>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
+                            </form>
+                        @endif
+                        <span class="badge bg-danger text-light">Disable</span>
                       </td>
                     </tr>
                     @endforeach
