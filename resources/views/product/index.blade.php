@@ -24,6 +24,7 @@
                   <tr>
                     <th>No</th>
                     <th>Category</th>
+                    <th>Image</th>
                     <th>Nama</th>
                     <th>Price</th>
                     <th>Sale Price</th>
@@ -34,13 +35,16 @@
                 <tbody>
                     @foreach ($products as $product)
                     <tr>
-                      <td>{{ $loop->iteration }}</td>
-                      <td>{{ $product->category->name }}</td>
-                      <td>{{ $product->name }}</td>
-                      <td>Rp. {{ number_format($product->price, 0, 2) }}</td>
-                      <td>Rp. {{ number_format($product->sale_price, 0, 2) }}</td>
-                      <td>{{ $product->brands }}</td>
-                      <td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $product->category->name }}</td>
+                        <td>
+                            <img src="{{ asset('storage/product/'.$product->image) }}" alt="{{ $product->name }}" style="max-width: 75px;">
+                        </td>
+                        <td>{{ $product->name }}</td>
+                        <td>Rp. {{ number_format($product->price, 0, 2) }}</td>
+                        <td>Rp. {{ number_format($product->sale_price, 0, 2) }}</td>
+                        <td>{{ $product->brands }}</td>
+                        <td>
                         @if (Auth::user()->role->name == 'admin')
                             <form onsubmit="return confirm('Are you sure delete data number {{ $loop->iteration }}?');" action="{{ route('product.destroy', $product->id) }}" method="POST">
                                 <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>

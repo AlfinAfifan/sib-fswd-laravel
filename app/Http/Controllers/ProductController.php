@@ -8,6 +8,7 @@ use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -24,13 +25,32 @@ class ProductController extends Controller
 
     public function create()
     {
+        $brands = Brand::all();
         $categories = Category::all();
+        $product = Product::all();
 
-        return view('product.create', compact('categories'));
+        return view('product.create', compact('categories', 'brands'));
     }
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'category' => 'required',
+            'name' => 'required|string|min:3',
+            'price' => 'required|integer',
+            'sale_price' => 'required|integer',
+            'brand' => 'required|string',
+            'rating' => 'required|integer',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
+        $imageName = time(). '.' .$request->image->extension();
+        Storage::putFileAs('public/product', $request->file('image'), $imageName);
+
         $product = Product::create([
             'category_id' => $request->category,
             'name' => $request->name,
@@ -38,6 +58,7 @@ class ProductController extends Controller
             'sale_price' => $request->sale_price,
             'brand' => $request->brand,
             'rating' => $request->rating,
+            'image' => $imageName,
         ]);
 
         return redirect()->route('product.index');
@@ -54,15 +75,48 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-        $product->update([
+        $validator = Validator::make($request->all(), [
+            'category' => 'required|',
+            'name' => 'required|string|min:3',
+            'price' => 'required|integer',
+            'sale_price' => 'required|integer',
+            'brand' => 'required|string',
+            'rating' => 'required|integer',
+            'image' => 'image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
+        if ($request->hasFile('image')) {
+            $oldImage = Product::find($id)->image;
+            Storage::delete('public/product/'.$oldImage);
+
+            $imageName = time(). '.' .$request->image->extension();
+            Storage::putFileAs('public/product', $request->file('image'), $imageName);
+
+            $product = Product::find($id);
+            $product->update([
             'category_id' => $request->category,
             'name' => $request->name,
             'price' => $request->price,
             'sale_price' => $request->sale_price,
             'brands' => $request->brand,
             'rating' => $request->rating,
-        ]);
+            'image' => $imageName,
+            ]);
+        } else {
+            $product = Product::find($id);
+            $product->update([
+                'category_id' => $request->category,
+                'name' => $request->name,
+                'price' => $request->price,
+                'sale_price' => $request->sale_price,
+                'brands' => $request->brand,
+                'rating' => $request->rating,
+            ]);
+        }
 
         return redirect()->route('product.index');
     }

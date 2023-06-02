@@ -41,9 +41,22 @@
                         Cart
                         <span class="badge bg-light text-dark ms-1 rounded-pill">0</span>
                     </a>
+                    @auth
+                        @if (Auth::user()->role->name == 'admin' || Auth::user()->role->name == 'staff')
+                        <a href="{{ route('dashboard') }}" class="btn btn-outline-light ms-1">
+                            <i class="bi-person-fill me-1"></i>Dashboard
+                        </a>
+                        @else
+                        <a href="{{ route('product.index') }}" class="btn btn-outline-light ms-1">
+                            <i class="bi-person-fill me-1"></i>Product
+                        </a>
+                        @endif
+                    @endauth
+
+                    @guest
                     <a href="{{ route('login') }}" class="btn btn-outline-light ms-1">
-                        <i class="bi-person-fill me-1"></i>
-                        Login
+                        <i class="bi-person-fill me-1"></i>Login
+                    @endguest
                     </a>
                 </form>
             </div>
@@ -61,7 +74,7 @@
             @foreach ($sliders as $slider)
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="3000">
                     <img src="{{ asset('storage/slider/' . $slider->image) }}" class="d-block w-100" alt="{{ $slider->image }}">
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-md-block" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))">
                         <h5>{{ $slider->title }}</h5>
                         <p>{{ $slider->caption }}</p>
                     </div>

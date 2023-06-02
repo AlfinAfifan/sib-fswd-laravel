@@ -25,7 +25,7 @@
                   <tr>
                     <th>No</th>
                     <th>Title</th>
-                    <th>Caption</th>
+                    <th class="col-md-6">Caption</th>
                     <th>Image</th>
                     <th>Action</th>
                   </tr>

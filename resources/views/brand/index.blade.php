@@ -9,13 +9,13 @@
       <div class="container-fluid">
         <!-- Page Heading -->
         @if (Auth::user()->role->name == 'admin')
-        <a href="{{ route('category.create') }}" class="btn btn-primary my-3">Create New</a>
+        <a href="{{ route('brand.create') }}" class="btn btn-primary my-3">Create New</a>
         @endif
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
           <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Tables Category</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Tables Brands</h6>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -28,14 +28,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($brands as $brand)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $category['name'] }}</td>
+                      <td>{{ $brand['name'] }}</td>
                       <td>
                         @if (Auth::user()->role->name == 'admin')
-                            <form onsubmit="return confirm('Are you sure delete data number {{ $loop->iteration }}?');" action="{{ route('category.destroy', $category->id) }}" method="POST">
-                                <a href="{{ route('category.edit', $category->id) }}" type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            <form onsubmit="return confirm('Are you sure delete data number {{ $loop->iteration }}?');" action="{{ route('brand.destroy', $brand->id) }}" method="POST">
+                                <a href="{{ route('brand.edit', $brand->id) }}" type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
 
                                 @csrf
                                 @method('DELETE')

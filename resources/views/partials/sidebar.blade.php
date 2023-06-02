@@ -25,9 +25,16 @@
             Interface
         </div>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('landing') }}">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Landing Page</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('slider.index') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Slider</span></a>
+                <i class="fas fa-fw fa-table"></i>
+                <span>Slider</span>
+            </a>
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -46,6 +53,7 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ route('brand.index') }}">Brand</a>
                     <a class="collapse-item" href="{{ route('category.index') }}">Category</a>
                     <a class="collapse-item" href="{{ route('product.index') }}">List Product</a>
                 </div>

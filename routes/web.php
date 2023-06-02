@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\LandingController;
@@ -32,9 +33,10 @@ Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
-
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+});
 
 Route::middleware('auth')->group(function () {
 
@@ -56,6 +58,16 @@ Route::middleware('auth')->group(function () {
             Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
             Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
             Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+        });
+
+        // Brand
+        Route::get('/brand', [BrandController::class, 'index'])->name('brand.index');
+        Route::middleware(['role:admin'])->group(function () {
+            Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
+            Route::post('/brand', [BrandController::class, 'store'])->name('brand.store');
+            Route::get('/brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+            Route::put('/brand/{id}', [BrandController::class, 'update'])->name('brand.update');
+            Route::delete('/brand/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
         });
 
         // Category
