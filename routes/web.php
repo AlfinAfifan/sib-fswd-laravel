@@ -33,9 +33,10 @@ Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
-Route::middleware(['guest'])->group(function () {
+Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+    Route::get('/login/forgot', [LoginController::class, 'forgot'])->name('login.forgot');
 });
 
 Route::middleware('auth')->group(function () {
@@ -61,24 +62,24 @@ Route::middleware('auth')->group(function () {
         });
 
         // Brand
-        Route::get('/brand', [BrandController::class, 'index'])->name('brand.index');
+        Route::get('/product/brand', [BrandController::class, 'index'])->name('brand.index');
         Route::middleware(['role:admin'])->group(function () {
-            Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
-            Route::post('/brand', [BrandController::class, 'store'])->name('brand.store');
-            Route::get('/brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
-            Route::put('/brand/{id}', [BrandController::class, 'update'])->name('brand.update');
-            Route::delete('/brand/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
+            Route::get('/product/brand/create', [BrandController::class, 'create'])->name('brand.create');
+            Route::post('/product/brand', [BrandController::class, 'store'])->name('brand.store');
+            Route::get('/product/brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+            Route::put('/product/brand/{id}', [BrandController::class, 'update'])->name('brand.update');
+            Route::delete('/product/brand/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
         });
 
         // Category
-        Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('/product/category', [CategoryController::class, 'index'])->name('category.index');
 
         Route::middleware(['role:admin'])->group(function () {
-            Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
-            Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
-            Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-            Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
-            Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+            Route::get('/product/category/create', [CategoryController::class, 'create'])->name('category.create');
+            Route::post('/product/category', [CategoryController::class, 'store'])->name('category.store');
+            Route::get('/product/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+            Route::put('/product/category/{id}', [CategoryController::class, 'update'])->name('category.update');
+            Route::delete('/product/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
         });
 
         // User
@@ -93,14 +94,14 @@ Route::middleware('auth')->group(function () {
         });
 
         // Role
-        Route::get('/role', [RoleController::class, 'index'])->name('role.index');
+        Route::get('/user/role', [RoleController::class, 'index'])->name('role.index');
 
         Route::middleware(['role:admin'])->group(function () {
-            Route::get('/role/create', [RoleController::class, 'create'])->name('role.create');
-            Route::post('/role', [RoleController::class, 'store'])->name('role.store');
-            Route::get('/role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
-            Route::put('/role/{id}', [RoleController::class, 'update'])->name('role.update');
-            Route::delete('/role/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
+            Route::get('/user/role/create', [RoleController::class, 'create'])->name('role.create');
+            Route::post('/user/role', [RoleController::class, 'store'])->name('role.store');
+            Route::get('/user/role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+            Route::put('/user/role/{id}', [RoleController::class, 'update'])->name('role.update');
+            Route::delete('/user/role/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
         });
 
         // Slider
