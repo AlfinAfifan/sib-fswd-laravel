@@ -23,8 +23,8 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string',
-            'caption' => 'required|string',
+            // 'title' => 'string',
+            // 'caption' => 'string',
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
@@ -55,8 +55,8 @@ class SliderController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string',
-            'caption' => 'required|string',
+            // 'title' => 'string',
+            // 'caption' => 'string',
             'image' => 'image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
