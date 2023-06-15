@@ -19,14 +19,22 @@ class UserSeeder extends Seeder
 
         $role = Role::inRandomOrder()->first();
 
-        for ($i=0; $i < 10; $i++) {
-            $user = User::create([
-                'role_id' => $role->id,
-                'name' => $faker->name,
-                'email' => $faker->email,
-                'password' => Hash::make('password'),
-                'phone' => $faker->phoneNumber,
-            ]);
-        }
+        $user = User::create([
+            'role_id' => 1,
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => '123',
+            'phone' => '085854'
+        ]);
+
+        // for ($i=0; $i < 10; $i++) {
+        //     $user = User::create([
+        //         'role_id' => $role->id,
+        //         'name' => $faker->name,
+        //         'email' => $faker->email,
+        //         'password' => Hash::make('password'),
+        //         'phone' => $faker->phoneNumber,
+        //     ]);
+        // }
     }
 }
