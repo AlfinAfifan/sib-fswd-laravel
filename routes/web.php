@@ -28,7 +28,8 @@ use App\Http\Controllers\DashboardController;
 //     return view('welcome');
 // });
 
-Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/', [LandingController::class, 'index'])->name('landing.index');
+Route::get('/detail/{id}', [LandingController::class, 'detail'])->name('landing.detail');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -43,6 +44,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+    Route::get('/profile/{id}', [LandingController::class, 'profile'])->name('landing.profile');
+    Route::put('/profile/{id}', [LandingController::class, 'update'])->name('profile.update');
 
 
     // Product

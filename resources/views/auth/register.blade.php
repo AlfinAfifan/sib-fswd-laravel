@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleRepeatPassword" placeholder="Repeat Password" name="password_confirm">
+                                                id="exampleRepeatPassword" placeholder="Repeat Password" name="password_confirmation">
                                             @error('password')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror

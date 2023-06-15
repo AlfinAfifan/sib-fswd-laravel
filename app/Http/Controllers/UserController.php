@@ -29,7 +29,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'phone' => 'required|integer',
+            'phone' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -53,7 +53,8 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $user = User::find($id);
         $roles = Role::all();
         return view('user.edit', compact('user', 'roles'));
@@ -66,7 +67,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email',
             'password' => 'required',
-            'phone' => 'required|integer',
+            'phone' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 

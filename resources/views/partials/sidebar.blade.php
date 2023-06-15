@@ -25,7 +25,7 @@
             Interface
         </div>
         <li class="nav-item">
-            <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('landing') }}">
+            <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('landing.index') }}">
                 <i class="bi bi-house-door-fill"></i>
                 <span>Landing Page</span>
             </a>

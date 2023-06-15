@@ -24,7 +24,7 @@
                 </div>
             <!-- Tambahkan elemen form lainnya di sini -->
             <button type="submit" class="btn btn-primary offset-md-3">Submit</button>
-            <button type="reset" class="btn btn-danger mx-2">Cancel</button>
+            <a href="{{ url()->previous() }}" class="btn btn-danger mx-2">Cancel</a>
             </form>
         </div>
     </div>

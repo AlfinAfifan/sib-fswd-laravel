@@ -62,14 +62,13 @@
                                                     placeholder="Enter Email Address..." name="email">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control form-control-user"
+                                                <input type="password" class="form-control form-control-user password"
                                                     id="exampleInputPassword" placeholder="Password" name="password">
                                             </div>
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                    <label class="custom-control-label" for="customCheck">Remember
-                                                        Me</label>
+                                                    <input type="checkbox" class="custom-control-input show" id="customCheck">
+                                                    <label class="custom-control-label" for="customCheck">Show Password</label>
                                                 </div>
                                             </div>
                                             <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
@@ -111,6 +110,7 @@
 
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
+        <script src="{{ asset('js/scripts.js') }}"></script>
 
     </body>
 

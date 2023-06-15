@@ -28,7 +28,7 @@ class LoginController extends Controller
                 return redirect()->route('dashboard');
             }
 
-            return redirect()->route('landing');
+            return redirect()->route('landing.index');
         }
 
         return redirect()->back()->with('error', 'Email / password salah');
@@ -42,7 +42,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('landing');
+        return redirect()->route('landing.index');
     }
 
     public function forgot()
