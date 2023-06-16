@@ -36,7 +36,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="inputName">Product Description</label>
-                        <textarea class="form-control @error('name') is-invalid @enderror" id="inputName" name="description" value="{{ old('description') }}"></textarea>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="inputName" name="description">{{ old('description') }}</textarea>
                         @error('description')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
