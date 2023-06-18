@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\LandingController;
@@ -11,7 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('/profile/{id}', [LandingController::class, 'profile'])->name('landing.profile');
-    Route::put('/profile/{id}', [LandingController::class, 'update'])->name('profile.update');
+    Route::put('/profile/{id}', [LandingController::class, 'update'])->name('land-profile.update');
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/{id}', [CartController::class, 'add'])->name('cart.add');
+    Route::post('landing/cart/{id}', [CartController::class, 'landingAdd'])->name('cart.add-landing');
+    Route::get('landing/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/cart/confirm', [CartController::class, 'confirm'])->name('cart.confirm');
+    Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::delete('/cart', [CartController::class, 'destroyAll'])->name('cart.destroyAll');
 
 
     // Product
@@ -54,14 +63,18 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:admin|staff'])->group(function () {
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard/{id}', [DashboardController::class, 'profile'])->name('dashboard.profile');
+        Route::put('/dashboard/{id}', [DashboardController::class, 'update'])->name('dash-profile.update');
 
         // Product
+        Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+        Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+
         Route::middleware(['role:admin'])->group(function () {
-            Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
-            Route::post('/product', [ProductController::class, 'store'])->name('product.store');
             Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
             Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
             Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+            Route::get('/product/approve/{id}', [ProductController::class, 'approve'])->name('product.approve');
         });
 
         // Brand
@@ -109,13 +122,22 @@ Route::middleware('auth')->group(function () {
 
         // Slider
         Route::get('/slider', [SliderController::class, 'index'])->name('slider.index');
+        Route::get('/slider/create', [SliderController::class, 'create'])->name('slider.create');
+        Route::post('/slider', [SliderController::class, 'store'])->name('slider.store');
 
         Route::middleware(['role:admin'])->group(function () {
-            Route::get('/slider/create', [SliderController::class, 'create'])->name('slider.create');
-            Route::post('/slider', [SliderController::class, 'store'])->name('slider.store');
             Route::get('/slider/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
             Route::put('/slider/{id}', [SliderController::class, 'update'])->name('slider.update');
             Route::delete('/slider/{id}', [SliderController::class, 'destroy'])->name('slider.destroy');
+            Route::get('/slider/approve/{id}', [SliderController::class, 'approve'])->name('slider.approve');
+        });
+
+        // Transaction
+        Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction.index');
+        Route::middleware(['role:admin'])->group(function () {
+            Route::get('/transaction/approve/{id}', [TransactionController::class, 'approve'])->name('transaction.approve');
+            Route::get('/transaction/detail/{id}', [TransactionController::class, 'detail'])->name('transaction.detail');
+            Route::delete('/transaction/{id}', [TransactionController::class, 'destroy'])->name('transaction.destroy');
         });
     });
 });

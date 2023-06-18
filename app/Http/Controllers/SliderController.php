@@ -11,8 +11,10 @@ class SliderController extends Controller
 {
     public function index()
     {
-        $sliders = Slider::all();
-        return view('slider.index', compact('sliders'));
+        $sliders = Slider::where('approve', true)->get();
+        $slidersUpdate = Slider::where('approve', false)->get();
+
+        return view('slider.index', compact('sliders', 'slidersUpdate'));
     }
 
     public function create()
@@ -91,6 +93,15 @@ class SliderController extends Controller
     public function destroy($id)
     {
         Slider::find($id)->delete();
+
+        return redirect()->route('slider.index');
+    }
+
+    public function approve($id)
+    {
+        Slider::find($id)->update([
+            'approve' => true,
+        ]);
 
         return redirect()->route('slider.index');
     }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-primary topbar static-top shadow">
+<nav class="navbar navbar-expand-lg bg-dark topbar static-top shadow">
     <div class="container">
 
         <a href="{{ route('landing.index') }}" class="text-light text-decoration-none navbar-brand">MyShop</a>
@@ -27,7 +27,7 @@
                         <input type="text" class="form-control bg-light small border-light" placeholder="Search for..."
                             aria-label="Search" aria-describedby="basic-addon2" name="search">
                         <div class="input-group-append">
-                            <button class="btn btn-primary btn-outline-light" type="submit">
+                            <button class="btn btn-secondary btn-outline-light" type="submit">
                                 <i class="fas fa-search fa-sm"></i>
                             </button>
                         </div>
@@ -37,9 +37,9 @@
 
             <!-- Nav Item - Chart -->
             <li class="nav-item dropdown no-arrow mx-1 my-auto">
-                <a class="btn text-light" role="button" href="#">
+                <a class="btn text-light" role="button" href="{{ route('cart.index') }}">
                     <i class="bi-cart-fill me-1"></i>Cart
-                    <span class="badge bg-light text-dark ms-1 rounded-pill">0</span>
+                    <span class="badge bg-light text-dark ms-1 rounded-pill">{{ $totalCart }}</span>
                 </a>
             </li>
 

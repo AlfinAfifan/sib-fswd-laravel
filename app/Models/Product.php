@@ -20,10 +20,16 @@ class Product extends Model
         'sale_price',
         'brands',
         'rating',
+        'approve',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function orderDetail()
+    {
+        return $this->hasMany('App\Models\OrderDetail','product_id', 'id');
     }
 }

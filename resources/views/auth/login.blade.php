@@ -84,9 +84,6 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="{{ route('login.forgot') }}">Forgot Password?</a>
-                                        </div>
-                                        <div class="text-center">
                                             <a class="small" href="{{ route('register') }}">Create an Account!</a>
                                         </div>
                                     </div>

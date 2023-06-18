@@ -14,13 +14,14 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->get();
+        $products = Product::with('category')->where('approve', true)->get();
+        $productsUpdate = Product::where('approve', false)->get();
 
         if (Auth::user()->role->name == 'user') {
-            return view('product.card', compact('products'));
+            return view('product.card', compact('products', 'productsUpdate'));
         }
 
-        return view('product.index', compact('products'));
+        return view('product.index', compact('products', 'productsUpdate'));
     }
 
     public function create()
@@ -130,6 +131,15 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
+
+        return redirect()->route('product.index');
+    }
+
+    public function approve($id)
+    {
+        Product::find($id)->update([
+            'approve' => true,
+        ]);
 
         return redirect()->route('product.index');
     }

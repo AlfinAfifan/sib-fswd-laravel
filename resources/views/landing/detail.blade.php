@@ -4,6 +4,11 @@
 @section('content')
 <!-- Product section-->
 <section class="py-5">
+    @if (Session::get('success'))
+    <div class="alert alert-success text-center" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ asset('storage/product/'.$product->image) }}" alt="..." /></div>
@@ -21,11 +26,14 @@
                 <h5>Detail Produk</h5>
                 <p class="lead">{{ $product->description }}</p>
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to cart
-                    </button>
+                    <form action="{{ route('cart.add', $product->id) }}" method="post">
+                        @csrf
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" name="total"/>
+                        <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

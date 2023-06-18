@@ -38,7 +38,7 @@
         {{-- Search --}}
         <form action="{{ route('landing.index') }}" method="GET">
             @csrf
-            <div class="row g-3 mb-3">
+            <div class="row g-3 mb-4">
                 <div class="col-sm-3">
                     <input type="text" class="form-control" placeholder="Min" name="min" value="{{ old('min') }}">
                 </div>
@@ -47,6 +47,13 @@
                 </div>
                 <div class="col-sm-2">
                     <button type="submit" class="btn btn-primary">Terapkan</button>
+                </div>
+                <div class="col-sm-3 offset-1">
+                    @if (Session::get('success'))
+                    <div class="alert alert-success text-center" role="alert">
+                        {{ session('success') }}
+                    </div>
+                    @endif
                 </div>
             </div>
         </form>
@@ -89,7 +96,11 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                                <form action="{{ route('cart.add-landing', $product->id) }}" method="post">
+                                    @csrf
+                                    <input class="form-control text-center me-3" id="inputQuantity" type="hidden" value="1" style="max-width: 3rem" name="total"/>
+                                    <div class="text-center"><button type="submit" class="btn btn-outline-dark mt-auto" href="#">Add to chart</button></div>
+                                </form>
                             </div>
                         </div>
                     </a>

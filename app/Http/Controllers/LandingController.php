@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,24 +19,33 @@ class LandingController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-        $sliders = Slider::all();
+        $sliders = Slider::where('approve', true)->get();
 
         if ($request->category) {
             $products = Product::with('category')->whereHas('category', function($query) use($request) {
                 $query->where('name', $request->category);
-            })->get();
+            })->where('approve', true)->get();
         } elseif ($request->min && $request->max) {
-            $products = Product::where('price', '>=', $request->min)->where('price', '<=', $request->max)->get();
+            $products = Product::where('price', '>=', $request->min)->where('price', '<=', $request->max)->where('approve', true)->get();
         } elseif ($request->search) {
-            $products = Product::where('name', 'like', '%' . $request->search . '%')->orWhereHas('category', function($query) use($request) {
-                $query->where('name', $request->category);
-            })->get();
+            $products = Product::where('name', 'like', '%' . $request->search . '%')->where('approve', true)->get();
         } else {
-            $products = Product::inRandomOrder()->limit(8)->get();
+            $products = Product::inRandomOrder()->limit(12)->where('approve', true)->get();
         }
 
+        // hitung produk dalam cart
+        if (Auth::check()) {
+            $order = Order::where('user_id', Auth::user()->id)->where('status', 0)->first();
+            if ($order) {
+                $totalCart = OrderDetail::where('order_id', $order->id)->get()->count();
+            } else {
+                $totalCart = 0;
+            }
+            return view('landing.index', compact('categories', 'sliders','products', 'totalCart'));
+        }
 
-        return view('landing.index', compact('categories', 'sliders','products'));
+        $totalCart = 0;
+        return view('landing.index', compact('categories', 'sliders','products', 'totalCart'));
     }
 
     public function detail($id) {
@@ -41,8 +53,16 @@ class LandingController extends Controller
         $product = Product::where('id', $id)->with('category')->first();
         $related = Product::where('category_id', $product->category->id)->inRandomOrder()->limit(4)->get();
 
+        // hitung produk dalam cart
+        $order = Order::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        if ($order) {
+            $totalCart = OrderDetail::where('order_id', $order->id)->get()->count();
+        } else {
+            $totalCart = 0;
+        }
+
         if ($product) {
-            return view('landing.detail', compact('categories', 'product', 'related'));
+            return view('landing.detail', compact('categories', 'product', 'related', 'totalCart'));
         } else {
             abort(404);
         }

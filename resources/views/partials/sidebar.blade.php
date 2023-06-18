@@ -75,6 +75,12 @@
                 </div>
             </div>
         </li>
+        <li class="nav-item {{ Request::is('transaction*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('transaction.index') }}">
+                <i class="bi bi-cash-stack"></i>
+                <span>Transaction</span>
+            </a>
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
     @endif

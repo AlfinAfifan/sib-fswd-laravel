@@ -1,4 +1,4 @@
-@extends('layouts.landing')
+@extends('layouts.main')
 
 @section('content')
 <div class="container py-5">
@@ -38,7 +38,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Edit Profil</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('land-profile.update', $user->id) }}" method="POST" enctype="multipart/form-data" class="my-3">
+                    <form action="{{ route('dash-profile.update', $user->id) }}" method="POST" enctype="multipart/form-data" class="my-3">
                         @csrf
                         @method('PUT')
 
