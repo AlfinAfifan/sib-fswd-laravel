@@ -353,3 +353,4 @@
 
 </html>
 
+{{-- tampilan navbar, search, input, default rating dan sale_price --}}

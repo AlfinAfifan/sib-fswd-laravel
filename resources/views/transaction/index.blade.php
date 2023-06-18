@@ -27,7 +27,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $order->date }}</td>
                             <td>{{ $order->code }}</td>
-                            <td>{{ $order->user_id }}</td>
+                            <td>{{ $order->user->name }}</td>
                             <td>Rp. {{ number_format($order->total_price, 0, 2) }}</td>
                             <td>
                             @if (Auth::user()->role->name == 'admin')
