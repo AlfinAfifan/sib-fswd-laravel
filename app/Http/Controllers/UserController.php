@@ -29,7 +29,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|integer',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -67,7 +67,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email',
             'password' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|integer',
             'image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 

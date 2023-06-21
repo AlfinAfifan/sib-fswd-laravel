@@ -35,19 +35,19 @@
                             <td>{{ $slider->title }}</td>
                             <td>{{ $slider->caption }}</td>
                             <td>
-                                <img src="{{ asset('storage/slider/' . $slider->image) }}" alt="{{ $slider->title }}" style="max-width:100px;">
+                                <img src="{{ asset('storage/slider/' . $slider->image) }}" alt="{{ $slider->title }}" style="max-width:230px;">
                             </td>
                             <td>
                                 @if (Auth::user()->role->name == 'admin')
-                                    <form onsubmit="return confirm('Are you sure not approve data number {{ $loop->iteration }}?');" action="{{ route('slider.destroy', $slider->id) }}" method="POST">
-                                        <a href="{{ route('slider.approve', $slider->id) }}" type="button" class="btn btn-success btn-sm"><i class="bi bi-check2-square"></i></a>
+                                <form onsubmit="return confirm('Are you sure not approve data number {{ $loop->iteration }}?');" action="{{ route('slider.destroy', $slider->id) }}" method="POST">
+                                    <a href="{{ route('slider.approve', $slider->id) }}" type="button" class="btn btn-success btn-sm"><i class="bi bi-check2-square"></i></a>
 
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-warning btn-sm"><i class="bi bi-x-square"></i></button>
-                                    </form>
+                                </form>
                                 @else
-                                    <span class="badge bg-danger text-light">Disable</span>
+                                <span class="badge bg-danger text-light">Disable</span>
                                 @endif
 
                             </td>
@@ -91,7 +91,7 @@
                             <td>{{ $slider->title }}</td>
                             <td>{{ $slider->caption }}</td>
                             <td>
-                                <img src="{{ asset('storage/slider/' . $slider->image) }}" alt="{{ $slider->title }}" style="max-width:100px;">
+                                <img src="{{ asset('storage/slider/' . $slider->image) }}" alt="{{ $slider->title }}" style="max-width:230px;">
                             </td>
                             <td>
                                 @if (Auth::user()->role->name == 'admin')

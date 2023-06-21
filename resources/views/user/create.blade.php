@@ -14,7 +14,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputRole">Role</label>
-                        <select id="inputRole" class="form-control @error('role') is-invalid @enderror" name="role" >
+                        <select id="inputRole" class="form-select @error('role') is-invalid @enderror" name="role" >
                             <option selected disabled>Choose...</option>
                             @foreach ($roles as $role)
                             <option value="{{ $role->id }}" {{ old('role') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
@@ -58,11 +58,10 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="inputName" class="">Image</label>
-                        <div class="custom-file ">
-                            <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="inputGroupFile02" name="image">
-                            <label class="custom-file-label rounded-left" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="inputGroupFile01" name="image">
                         </div>
                         @error('image')
                             <small class="text-danger">{{ $message }}</small>
@@ -70,7 +69,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <a href="{{ url()->previous() }}" class="btn btn-danger mx-2">Cancel</a>
+                <a href="{{ route('user.index') }}" class="btn btn-danger mx-2">Cancel</a>
             </form>
         </div>
     </div>

@@ -54,14 +54,13 @@ class LandingController extends Controller
         $related = Product::where('category_id', $product->category->id)->inRandomOrder()->limit(4)->get();
 
         // hitung produk dalam cart
-        $order = Order::where('user_id', Auth::user()->id)->where('status', 0)->first();
-        if ($order) {
-            $totalCart = OrderDetail::where('order_id', $order->id)->get()->count();
-        } else {
-            $totalCart = 0;
+        if (Auth::check()) {
+            $order = Order::where('user_id', Auth::user()->id)->where('status', 0)->first();
+                $totalCart = OrderDetail::where('order_id', $order->id)->get()->count();
         }
 
         if ($product) {
+            $totalCart = 0;
             return view('landing.detail', compact('categories', 'product', 'related', 'totalCart'));
         } else {
             abort(404);
@@ -74,7 +73,15 @@ class LandingController extends Controller
         $roles = Role::all();
         $user = User::find($id);
 
-        return view('landing.profile', compact('categories', 'roles', 'user'));
+        // hitung produk dalam cart
+        $order = Order::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        if ($order) {
+            $totalCart = OrderDetail::where('order_id', $order->id)->get()->count();
+        } else {
+            $totalCart = 0;
+        }
+
+        return view('landing.profile', compact('categories', 'roles', 'user', 'totalCart'));
     }
 
     public function update(Request $request, $id)

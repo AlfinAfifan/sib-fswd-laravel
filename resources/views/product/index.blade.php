@@ -25,7 +25,7 @@
                                     <th>Nama</th>
                                     <th>Price</th>
                                     <th>Sale Price</th>
-                                    <th>Description</th>
+                                    <th style="width: 45%;">Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -43,8 +43,8 @@
                                         <td>{{ $product->description }}</td>
                                         <td>
                                         @if (Auth::user()->role->name == 'admin')
-                                            <form onsubmit="return confirm('Are you sure not approve data number {{ $loop->iteration }}?');" action="{{ route('product.destroy', $product->id) }}" method="POST">
-                                                <a href="{{ route('product.approve', $product->id) }}" class="btn btn-success btn-sm"><i class="bi bi-check2-square"></i></a>
+                                            <a href="{{ route('product.approve', $product->id) }}" class="btn btn-success btn-sm"><i class="bi bi-check2-square"></i></a>
+                                            <form onsubmit="return confirm('Are you sure not approve data number {{ $loop->iteration }}?');" action="{{ route('product.destroy', $product->id) }}" method="POST" class="mt-2">
 
                                                 @csrf
                                                 @method('DELETE')
@@ -84,7 +84,7 @@
                                     <th>Nama</th>
                                     <th>Price</th>
                                     <th>Sale Price</th>
-                                    <th>Description</th>
+                                    <th style="width: 45%;">Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -102,9 +102,8 @@
                                         <td>{{ $product->description }}</td>
                                         <td>
                                         @if (Auth::user()->role->name == 'admin')
-                                            <form onsubmit="return confirm('Are you sure delete data number {{ $loop->iteration }}?');" action="{{ route('product.destroy', $product->id) }}" method="POST">
-                                                <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
-
+                                            <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square "></i></a>
+                                            <form onsubmit="return confirm('Are you sure delete data number {{ $loop->iteration }}?');" action="{{ route('product.destroy', $product->id) }}" method="POST" class="mt-2">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>

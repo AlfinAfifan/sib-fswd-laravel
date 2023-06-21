@@ -22,7 +22,7 @@
                 </div>
             <!-- Tambahkan elemen form lainnya di sini -->
             <button type="submit" class="btn btn-primary offset-md-3">Submit</button>
-            <a href="{{ url()->previous() }}" class="btn btn-danger mx-2">Cancel</a>
+            <a href="{{ route('role.index') }}" class="btn btn-danger mx-2">Cancel</a>
             </form>
         </div>
     </div>

@@ -122,6 +122,10 @@ class CartController extends Controller
         if ($order) {
             $orderDetail = OrderDetail::with('products')->where('order_id', $order->id)->get();
             $totalCart = OrderDetail::where('order_id', $order->id)->get()->count();
+            // Tambahkan kode unik pembayaran
+            $order->update([
+                'code' => mt_rand(100, 9999),
+            ]);
 
             return view('cart.checkout', compact('categories', 'order', 'orderDetail', 'totalCart'));
         } else {
@@ -136,19 +140,20 @@ class CartController extends Controller
     {
         $order = Order::where('user_id', Auth::user()->id)->where('status', 0)->where('approve', false)->first();
 
-        // Tambahkan kode unik pembayaran
-        $order->update([
-            'status' => 1,
-            'code' => mt_rand(100, 9999),
-        ]);
+        if ($order) {
+            $order->update([
+                'status' => 1,
+            ]);
 
-        // Kirim konfirmasi ke wa
-        $nomorWhatsApp = '+6285854455376';
-        $pesan = "Konfirmasi pembayaran dengan detail:\n\nKode transaksi : #$order->code\nTotal Pembayaran : Rp. $order->total_price\n\nSegera kirim bukti screenshoot / foto pembayaran ke nomor ini";
-        $pesanUrlEncoded = urlencode($pesan);
-        $waUrl = "https://api.whatsapp.com/send?phone=$nomorWhatsApp&text=$pesanUrlEncoded";
+            // Kirim konfirmasi ke wa
+            $nomorWhatsApp = '+6285854455376';
+            $pesan = "Konfirmasi pembayaran dengan detail:\n\nKode transaksi : #$order->code\nTotal Pembayaran : Rp. $order->total_price\n\nSegera kirim bukti screenshoot / foto pembayaran ke nomor ini";
+            $pesanUrlEncoded = urlencode($pesan);
+            $waUrl = "https://api.whatsapp.com/send?phone=$nomorWhatsApp&text=$pesanUrlEncoded";
 
-        return redirect()->away($waUrl);
+            return redirect()->away($waUrl);
+        }
+        return redirect()->route('cart.index');
     }
 
     public function destroy($id)

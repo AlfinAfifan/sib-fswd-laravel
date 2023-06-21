@@ -16,7 +16,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-2">
                                 <label for="inputRole">Category Product</label>
-                                <select id="inputRole" class="form-control @error('category') is-invalid @enderror" name="category">
+                                <select id="inputRole" class="form-select @error('category') is-invalid @enderror" name="category">
                                     <option selected disabled>Choose...</option>
                                     @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
@@ -74,7 +74,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputRole">Brand</label>
-                                <select id="inputRole" class="form-control @error('brand') is-invalid @enderror" name="brand">
+                                <select id="inputRole" class="form-select @error('brand') is-invalid @enderror" name="brand">
                                     <option selected disabled>Choose...</option>
                                     @foreach ($brands as $brand)
                                     <option value="{{ $brand->name }}" {{ $product->brands == $brand->name ? 'selected' : '' }}>{{ $brand->name }}</option>
@@ -93,11 +93,10 @@
                             @enderror
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="inputName" class="">Image</label>
-                                <div class="custom-file ">
-                                    <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="inputGroupFile02" name="image">
-                                    <label class="custom-file-label rounded-left" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                                <div class="input-group mb-3">
+                                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="inputGroupFile01" name="image">
                                 </div>
                                 @error('image')
                                     <small class="text-danger">{{ $message }}</small>
@@ -106,7 +105,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ url()->previous() }}" class="btn btn-danger mx-2">Cancel</a>
+                        <a href="{{ route('product.index') }}" class="btn btn-danger mx-2">Cancel</a>
                     </form>
                 </div>
             </div>

@@ -31,11 +31,10 @@
                 </div>
                 <div class="input-group row mb-3">
                     <label for="inputName" class="col-sm-3 col-form-label">Image</label>
-                    <div class="col-sm-3 mx-3">
-                        <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="inputGroupFile02" name="image">
-                        <label class="custom-file-label rounded-left" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                    <div class="input-group mb-3 ms-2 col-sm-4">
+                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="inputGroupFile01" name="image">
                     </div>
-                    <div class="col-sm-12 offset-sm-3">
+                    <div class="col">
                         @error('image')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -44,7 +43,7 @@
 
                 <!-- Tambahkan elemen form lainnya di sini -->
                 <button type="submit" class="btn btn-primary offset-md-3">Submit</button>
-                <a href="{{ url()->previous() }}" class="btn btn-danger mx-2">Cancel</a>
+                <a href="{{ route('slider.index') }}" class="btn btn-danger mx-2">Cancel</a>
             </form>
         </div>
     </div>

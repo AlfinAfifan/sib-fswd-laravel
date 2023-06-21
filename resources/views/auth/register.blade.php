@@ -48,7 +48,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                            <input type="number" class="form-control form-control-user" id="exampleLastName"
                                                 placeholder="Phone" name="phone">
                                             @error('phone')
                                             <small class="text-danger">{{ $message }}</small>

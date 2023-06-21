@@ -24,17 +24,17 @@
                     @endif
                 </div>
                 <h5>Detail Produk</h5>
-                <p class="lead">{{ $product->description }}</p>
-                <div class="d-flex">
-                    <form action="{{ route('cart.add', $product->id) }}" method="post">
-                        @csrf
-                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" name="total"/>
+                <p class="lead fs-6" style="font-family: roboto">{{ $product->description }}</p>
+                <form action="{{ route('cart.add', $product->id) }}" method="post" class="row">
+                    @csrf
+                    <input class="form-control text-center ms-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" name="total"/>
+                    <div class="col-10">
                         <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Add to cart
                         </button>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
