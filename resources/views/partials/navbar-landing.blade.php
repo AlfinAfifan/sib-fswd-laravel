@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-white topbar sticky-top shadow">
     <div class="container">
 
-        <a href="{{ route('landing.index') }}" class="text-black text-decoration-none navbar-brand"><img src="{{ asset('img/logo.png') }}" alt="logo" style="max-width: 100px;"></a>
+        <a href="{{ route('landing.index') }}" class="text-black text-decoration-none navbar-brand"><img src="{{ asset('storage/asset/logo.png') }}" alt="logo" style="max-width: 100px;"></a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 fw-medium">
             <li class="nav-item"><a class="nav-link active text-black" aria-current="page" href="{{ route('landing.index') }}">Home</a></li>
             <li class="nav-item"><a class="nav-link active text-black" aria-current="page" href="{{ route('landing.index') }}">Product</a></li>
