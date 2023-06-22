@@ -31,17 +31,15 @@
                                 <td>
                                     <div class="product-item d-flex">
                                         <a class="product-thumb" href="{{ route('landing.detail', ['id' => $detail->products->id]) }}"><img src="{{ asset('storage/product/'. $detail->products->image) }}" alt="Product" style="max-width: 110px;"/></a>
-                                        <div class="product-info ms-4 my-auto">
+                                        <div class="product-info ms-4">
                                             <h4 class="fs-6"><a class="text-decoration-none text-dark" href="{{ route('landing.detail', ['id' => $detail->products->id]) }}">{{ $detail->products->name }}</a></h4>
-                                            <span><em>Size:</em> 10.5</span> <br>
-                                            <span><em>Color:</em> Dark Blue</span>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center text-lg text-medium my-auto fs-6">Rp. {{ number_format($detail->products->price) }}</td>
-                                <td class="text-center text-lg my-auto fs-6">{{ $detail->total }}</td>
-                                <td class="text-center text-lg my-auto fs-6">Rp. {{ number_format($detail->total_price, 0) }}</td>
-                                <td class="text-center my-auto">
+                                <td class="text-center text-lg text-medium fs-6">Rp. {{ number_format($detail->products->price) }}</td>
+                                <td class="text-center text-lg fs-6">{{ $detail->total }}</td>
+                                <td class="text-center text-lg fs-6">Rp. {{ number_format($detail->total_price, 0) }}</td>
+                                <td class="text-center">
                                     <form onsubmit="return confirm('Are you sure delete product number {{ $loop->iteration }}?');" action="{{ route('cart.destroy', $detail->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')

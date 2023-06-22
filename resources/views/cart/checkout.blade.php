@@ -68,7 +68,7 @@
                         <a class="btn btn-outline-secondary" href="{{ route('landing.index') }}"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a>
                     </div>
                     <div class="col text-right">
-                        <a class="btn btn-success" href="{{ route('cart.confirm') }}">Konfirmasi</a>
+                        <a class="btn btn-success" href="{{ route('cart.confirm')  }}" target="_blank">Konfirmasi</a>
                     </div>
                 </div>
             </div>
