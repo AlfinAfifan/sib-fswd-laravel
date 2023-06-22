@@ -30,7 +30,7 @@ class LandingController extends Controller
         } elseif ($request->search) {
             $products = Product::where('name', 'like', '%' . $request->search . '%')->where('approve', true)->get();
         } else {
-            $products = Product::inRandomOrder()->limit(12)->where('approve', true)->get();
+            $products = Product::where('approve', true)->orderBy('id', 'desc')->paginate(12);
         }
 
         // hitung produk dalam cart

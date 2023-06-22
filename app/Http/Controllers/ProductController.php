@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->where('approve', true)->get();
+        $products = Product::with('category')->where('approve', true)->get()->sortByDesc('id');
         $productsUpdate = Product::where('approve', false)->get();
 
         if (Auth::user()->role->name == 'user') {
@@ -53,16 +53,30 @@ class ProductController extends Controller
         $imageName = time(). '.' .$request->image->extension();
         Storage::putFileAs('public/product', $request->file('image'), $imageName);
 
-        $product = Product::create([
-            'category_id' => $request->category,
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'sale_price' => $request->sale_price,
-            'brands' => $request->brand,
-            'rating' => $request->rating,
-            'image' => $imageName,
-        ]);
+        if (Auth::user()->role_id == 1) {
+            Product::create([
+                'category_id' => $request->category,
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'sale_price' => $request->sale_price,
+                'brands' => $request->brand,
+                'rating' => $request->rating,
+                'image' => $imageName,
+                'approve' => true,
+            ]);
+        } else {
+            Product::create([
+                'category_id' => $request->category,
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'sale_price' => $request->sale_price,
+                'brands' => $request->brand,
+                'rating' => $request->rating,
+                'image' => $imageName,
+            ]);
+        }
 
         return redirect()->route('product.index');
     }

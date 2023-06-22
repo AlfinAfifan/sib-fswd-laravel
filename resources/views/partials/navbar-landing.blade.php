@@ -1,15 +1,20 @@
 <nav class="navbar navbar-expand-lg bg-white topbar sticky-top shadow">
     <div class="container">
 
-        <a href="{{ route('landing.index') }}" class="text-black text-decoration-none navbar-brand"><img src="{{ asset('storage/asset/logo.png') }}" alt="logo" style="max-width: 100px;"></a>
+        <a href="{{ route('landing.index') }}" class="text-black text-decoration-none navbar-brand"><img src="{{ asset('img/logo.png') }}" alt="logo" style="max-width: 100px;"></a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 fw-medium">
-            <li class="nav-item"><a class="nav-link active text-black" aria-current="page" href="{{ route('landing.index') }}">Home</a></li>
-            <li class="nav-item"><a class="nav-link active text-black" aria-current="page" href="{{ route('landing.index') }}">Product</a></li>
-
-            @foreach ($categories as $category)
-            <li class="nav-item"><a class="nav-link active text-black" aria-current="page" href="{{ route('landing.index', ['category' => $category->name]) }}">{{ $category->name }}</a></li>
-            @endforeach
-            <li class="nav-item"><a class="nav-link active text-black" aria-current="page" href="{{ route('landing.index') }}">About Us</a></li>
+            <li class="nav-item mx-2"><a class="nav-link active text-black" aria-current="page" href="{{ route('landing.index') }}">Home</a></li>
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link text-black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Category<i class="bi bi-caret-down-fill mt-1" style="scale: 0.8;"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    @foreach ($categories as $category)
+                    <li><a class="dropdown-item" href="{{ route('landing.index', ['category' => $category->name]) }}">{{ $category->name }}</a></li>
+                    @endforeach
+                </ul>
+            </li>
+            <li class="nav-item mx-2"><a class="nav-link active text-black" aria-current="page" href="#footer">About Us</a></li>
         </ul>
 
 

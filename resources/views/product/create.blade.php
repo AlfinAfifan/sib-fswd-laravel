@@ -61,7 +61,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">Rp.</div>
                                 </div>
-                                <input type="text" class="form-control @error('sale_price') is-invalid @enderror" id="inputPrice2" name="sale_price" placeholder="0" value="{{ old('sale_price') }}">
+                                <input type="text" class="form-control @error('sale_price') is-invalid @enderror" id="inputPrice2" name="sale_price" placeholder="0" value="{{ old('sale_price') ? old('sale_price') : 0 }}">
                             </div>
                             @error('sale_price')
                             <small class="text-danger">{{ $message }}</small>
@@ -74,7 +74,7 @@
                         <select id="inputRole" class="form-select @error('brand') is-invalid @enderror" name="brand">
                             <option selected disabled>Choose...</option>
                             @foreach ($brands as $brand)
-                            <option value="{{ $brand->name }}">{{ $brand->name }}</option>
+                            <option value="{{ $brand->name }}" {{ old('brand') == $brand->name ? 'selected' : '' }}>{{ $brand->name }}</option>
                             @endforeach
                         </select>
                         @error('brand')
@@ -83,7 +83,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputRating">Rating</label>
-                        <input type="text" class="form-control @error('rating') is-invalid @enderror" id="inputRating" placeholder="Input 1-5" name="rating" value="{{ old('rating') }}">
+                        <input type="text" class="form-control @error('rating') is-invalid @enderror" id="inputRating" placeholder="Input 1-5" name="rating" value="{{ old('rating') ? old('rating') : 0 }}">
                         @error('rating')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror

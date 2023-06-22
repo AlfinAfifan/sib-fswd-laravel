@@ -64,7 +64,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">Rp.</div>
                                     </div>
-                                    <input type="text" class="form-control @error('sale_price') is-invalid @enderror" id="inputPrice2" name="sale_price" placeholder="0" value="{{ $product->price }}">
+                                    <input type="text" class="form-control @error('sale_price') is-invalid @enderror" id="inputPrice2" name="sale_price" placeholder="0" value="{{ $product->sale_price }}">
                                 </div>
                                 @error('sale_price')
                                     <small class="text-danger">{{ $message }}</small>

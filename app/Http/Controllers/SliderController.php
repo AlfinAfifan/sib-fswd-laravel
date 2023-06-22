@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Slider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -37,11 +38,20 @@ class SliderController extends Controller
         $imageName = time().'.'.$request->image->extension();
         Storage::putFileAs('public/slider', $request->file('image'), $imageName);
 
-        $slider = Slider::create([
-            'title' => $request->title,
-            'caption' => $request->caption,
-            'image' => $imageName,
-        ]);
+        if (Auth::user()->role_id == 1) {
+            Slider::create([
+                'title' => $request->title,
+                'caption' => $request->caption,
+                'image' => $imageName,
+                'approve' => true,
+            ]);
+        } else {
+            Slider::create([
+                'title' => $request->title,
+                'caption' => $request->caption,
+                'image' => $imageName,
+            ]);
+        }
 
         return redirect()->route('slider.index');
     }

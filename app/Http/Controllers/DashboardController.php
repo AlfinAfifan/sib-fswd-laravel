@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +14,12 @@ use Illuminate\Support\Facades\Validator;
 class DashboardController extends Controller
 {
     public function index() {
-        return view('dashboard.index');
+        $totalOrder = Order::where('approve', true)->count();
+        $orderReq = Order::where('approve', false)->count();
+        $totalProduct = Product::where('approve', true)->count();
+        $productReq = Product::where('approve', false)->count();
+
+        return view('dashboard.index', compact('totalOrder', 'orderReq', 'totalProduct', 'productReq'));
     }
 
     public function profile($id)

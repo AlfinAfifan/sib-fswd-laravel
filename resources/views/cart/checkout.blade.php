@@ -78,5 +78,3 @@
 
     </div>
 @endsection
-
-{{-- default rating dan sale_price --}}

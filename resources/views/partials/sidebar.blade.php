@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon">
             <i class="bi bi-clipboard-data-fill"></i>
         </div>
-        <div class="sidebar-brand-text mx-3"> Data </div>
+        <div class="sidebar-brand-text mx-3"> Admin </div>
     </a>
 
 

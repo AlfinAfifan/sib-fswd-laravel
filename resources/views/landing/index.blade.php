@@ -110,6 +110,10 @@
                     <h4>Produk belum tersedia</h4>
                 </div>
             @endforelse
+
+        </div>
+        <div class="d-flex justify-content-center">
+            {{ $products->links() }}
         </div>
     </div>
 </section>
