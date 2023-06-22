@@ -77,7 +77,7 @@
                                 <select id="inputRole" class="form-select @error('brand') is-invalid @enderror" name="brand">
                                     <option selected disabled>Choose...</option>
                                     @foreach ($brands as $brand)
-                                    <option value="{{ $brand->name }}" {{ $product->brands == $brand->name ? 'selected' : '' }}>{{ $brand->name }}</option>
+                                    <option value="{{ $brand->name }}" {{ $product->brand == $brand->name ? 'selected' : '' }}>{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('brand')
