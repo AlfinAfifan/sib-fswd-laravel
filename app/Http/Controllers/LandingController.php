@@ -56,11 +56,12 @@ class LandingController extends Controller
         // hitung produk dalam cart
         if (Auth::check()) {
             $order = Order::where('user_id', Auth::user()->id)->where('status', 0)->first();
-                $totalCart = OrderDetail::where('order_id', $order->id)->get()->count();
+            $totalCart = OrderDetail::where('order_id', $order->id)->get()->count();
+        } else {
+            $totalCart = 0;
         }
 
         if ($product) {
-            $totalCart = 0;
             return view('landing.detail', compact('categories', 'product', 'related', 'totalCart'));
         } else {
             abort(404);
