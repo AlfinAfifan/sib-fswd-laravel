@@ -46,7 +46,7 @@
                     <input type="text" class="form-control" placeholder="Max" name="max" value="{{ old('max') }}">
                 </div>
                 <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary">Terapkan</button>
+                    <button type="submit" class="btn btn-dark">Terapkan</button>
                 </div>
                 <div class="col-sm-3 offset-1">
                     @if (Session::get('success'))
