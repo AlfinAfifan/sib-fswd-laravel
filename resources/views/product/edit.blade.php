@@ -87,10 +87,10 @@
                             <div class="form-group col-md-6">
                                 <label for="inputRating">Rating</label>
                                 <input type="number" class="form-control @error('rating') is-invalid @enderror" id="inputRating" placeholder="Input 1-5" name="rating" value="{{ $product->rating }}">
+                                @error('rating')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
-                            @error('rating')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">

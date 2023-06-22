@@ -42,7 +42,7 @@ class ProductController extends Controller
             'price' => 'required|integer',
             'sale_price' => 'required|integer',
             'brand' => 'required|string',
-            'rating' => 'required|integer',
+            'rating' => 'required|integer|between:0,5',
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -99,7 +99,7 @@ class ProductController extends Controller
             'price' => 'required|integer',
             'sale_price' => 'required|integer',
             'brand' => 'required|string',
-            'rating' => 'required|integer',
+            'rating' => 'required|integer|between:0,5',
             'image' => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
 

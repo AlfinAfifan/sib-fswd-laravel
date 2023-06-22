@@ -82,7 +82,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputRating">Rating</label>
+                        <label for="inputRating">Rating (0-5)</label>
                         <input type="text" class="form-control @error('rating') is-invalid @enderror" id="inputRating" placeholder="Input 1-5" name="rating" value="{{ old('rating') ? old('rating') : 0 }}">
                         @error('rating')
                             <small class="text-danger">{{ $message }}</small>
