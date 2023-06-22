@@ -24,10 +24,10 @@
 
     <body class="bg-gradient-primary">
 
-        <div class="container">
+        <div class="container pt-5">
 
             <!-- Outer Row -->
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mt-5">
 
                 <div class="col-xl-10 col-lg-12 col-md-9">
                     <div class="card o-hidden border-0 shadow-lg my-5">
@@ -35,7 +35,7 @@
                             <!-- Nested Row within Card Body -->
                             <div class="row">
                                 {{-- Image --}}
-                                <div class="col-lg-6 d-none d-lg-block bg-login-image" style="background-image: url({{ asset('img/bg-login.jpg') }})"></div>
+                                <div class="col-lg-6 d-none d-lg-block bg-login-image" style="background-image: url({{ asset('img/login2.jpg') }})"></div>
                                 <div class="col-lg-6">
                                     <div class="p-5">
                                         <div class="text-center">
